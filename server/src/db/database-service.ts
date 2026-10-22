@@ -31,8 +31,8 @@ export class DatabaseService {
   private userAchievements: Map<string, Set<string>> = new Map();
 
   constructor() {
-    const url = process.env.SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://cilcuzhcjksudlvmjcei.supabase.co';
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_sBw90_Wsguf_-gFg4l6wgg_UsDqcHpe';
 
     if (url && key && !url.includes('your-project-id') && !key.includes('your_supabase_service_role_key')) {
       try {
@@ -40,7 +40,7 @@ export class DatabaseService {
           auth: { persistSession: false, autoRefreshToken: false }
         });
         this.isSupabaseConfigured = true;
-        console.log('[Database] Connected to Supabase PostgreSQL database.');
+        console.log('[Database] Connected to Supabase PostgreSQL database:', url);
       } catch (err: any) {
         console.warn('[Database] Failed to initialize Supabase client:', err.message);
       }
