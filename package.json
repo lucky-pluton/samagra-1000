@@ -1,0 +1,25 @@
+{
+  "name": "samagra-1000-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Samagra 1000 — A Complete Python Coding & Scholarship Platform",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"api,app\" -c \"cyan,magenta\" \"npm --workspace=server run dev\" \"npm --workspace=client run dev\"",
+    "dev:server": "npm --workspace=server run dev",
+    "dev:client": "npm --workspace=client run dev",
+    "build": "npm --workspace=server run build && npm --workspace=client run build",
+    "test": "vitest run",
+    "generate:bank": "tsx scripts/generate-question-bank.ts",
+    "validate:bank": "tsx scripts/validate-question-bank.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
